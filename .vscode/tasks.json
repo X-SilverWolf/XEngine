@@ -1,0 +1,76 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "CMake: Configure (MSVC)",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "-S",
+                "..",
+                "-B",
+                ".",
+                "-G",
+                "Visual Studio 17 2022",
+                "-A",
+                "x64",
+                "-DCMAKE_BUILD_TYPE=Debug"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/build"
+            },
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            }
+        },
+        {
+            "label": "CMake: Configure (GCC)",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "-S",
+                "..",
+                "-B",
+                ".",
+                "-G",
+                "Ninja",
+                "-DCMAKE_BUILD_TYPE=Debug",
+                "-DCMAKE_C_COMPILER=C:/msys64/mingw64/bin/gcc.exe",
+                "-DCMAKE_CXX_COMPILER=C:/msys64/mingw64/bin/g++.exe"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/build"
+            },
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            }
+        },
+        {
+            "label": "CMake: Build All",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "--build",
+                ".",
+                "--config",
+                "Debug",
+                "-j16"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/build"
+            },
+            "problemMatcher": [
+                "$msCompile",
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}

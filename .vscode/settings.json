@@ -1,0 +1,179 @@
+{
+    //MARKDOWN FILE SETTINGS
+    "markdown.validate.enabled": true,
+    "[markdown]": {
+        "editor.unicodeHighlight.ambiguousCharacters": false,
+        "editor.unicodeHighlight.invisibleCharacters": false,
+        "diffEditor.ignoreTrimWhitespace": false,
+        "editor.wordWrap": "on",
+        "editor.quickSuggestions": {
+            "comments": "on",
+            "strings": "on",
+            "other": "on"
+        }
+    },
+    "editor.accessibilitySupport": "on",
+    "grammarly.selectors": [
+        {
+            "language": "markdown",
+            "scheme": "file"
+        },
+        {
+            "language": "plaintext",
+            "scheme": "file"
+        }
+    ],
+    "workbench.colorTheme": "Default Dark Modern",
+    "workbench.iconTheme": "material-icon-theme",
+    "workbench.startupEditor": "none",
+    "editor.minimap.enabled": false,
+    "editor.renderWhitespace": "boundary",
+    "editor.guides.bracketPairs": "active",
+    "editor.bracketPairColorization.enabled": true,
+    "editor.formatOnSave": true,
+    "editor.detectIndentation": true,
+    "editor.wordWrap": "on",
+    "editor.linkedEditing": true,
+    "editor.stickyScroll.enabled": true,
+    "explorer.compactFolders": false,
+    "terminal.integrated.defaultProfile.osx": "fish",
+    //"terminal.external.osxExec": "/opt/homebrew/bin/fish",
+    "git.autorefresh": true,
+    "git.confirmSync": false,
+    "git.enableSmartCommit": true,
+    "git.autofetch": true,
+    // C++ IntelliSense settings
+    "C_Cpp.intelliSenseEngine": "default",
+    "C_Cpp.autocomplete": "default",
+    "C_Cpp.suggestSnippets": true,
+    "C_Cpp.errorSquiggles": "enabled",
+    "C_Cpp.enhancedColorization": "enabled",
+    "C_Cpp.intelliSenseUpdateDelay": 1000,
+    "C_Cpp.default.browse.limitSymbolsToIncludedHeaders": false,
+    "C_Cpp.default.systemIncludePath": [
+        "/usr/include",
+        "/usr/local/include"
+    ],
+    // C++ Formatting settings
+    "[cpp]": {
+        "editor.defaultFormatter": "ms-vscode.cpptools",
+        "editor.formatOnSave": true,
+        // 禁用宏定义区域的自动格式化（通过语言服务器配置）
+        "editor.formatOnType": false
+    },
+    "[c]": {
+        "editor.defaultFormatter": "ms-vscode.cpptools",
+        "editor.formatOnSave": true,
+        "editor.formatOnType": false
+    },
+    "C_Cpp.formatting": "clangFormat",
+    "C_Cpp.clang_format_style": "file",
+    "C_Cpp.clang_format_fallbackStyle": "Google",
+    // 注意：formatOnType 已移到语言特定设置中，避免在宏定义时自动格式化
+    // 如果需要输入时格式化，可以手动触发（Shift+Alt+F）
+    // CMake settings
+    "cmake.configureOnOpen": true,
+    "cmake.buildDirectory": "${workspaceFolder}/XTest/build",
+    "cmake.sourceDirectory": "${workspaceFolder}/XTest",
+    "cmake.generator": "MinGW Makefiles",
+    "cmake.defaultVariants": {
+        "buildType": {
+            "default": "debug",
+            "description": "The build type to use"
+        }
+    },
+    "cmake.buildBeforeRun": true,
+    "cmake.parallelJobs": 4,
+    // 设置默认构建目标（可选，留空则构建所有目标）
+    // "cmake.defaultTarget": "XPlat",
+    // Python settings
+    "python.defaultInterpreterPath": "D:\\WorkTools\\Python\\Python314\\python.exe",
+    "files.associations": {
+        "cctype": "cpp",
+        "clocale": "cpp",
+        "cmath": "cpp",
+        "csignal": "cpp",
+        "cstdarg": "cpp",
+        "cstddef": "cpp",
+        "cstdio": "cpp",
+        "cstdlib": "cpp",
+        "cstring": "cpp",
+        "ctime": "cpp",
+        "cwchar": "cpp",
+        "cwctype": "cpp",
+        "array": "cpp",
+        "atomic": "cpp",
+        "bit": "cpp",
+        "bitset": "cpp",
+        "chrono": "cpp",
+        "codecvt": "cpp",
+        "compare": "cpp",
+        "complex": "cpp",
+        "concepts": "cpp",
+        "condition_variable": "cpp",
+        "cstdint": "cpp",
+        "deque": "cpp",
+        "list": "cpp",
+        "map": "cpp",
+        "set": "cpp",
+        "string": "cpp",
+        "unordered_map": "cpp",
+        "vector": "cpp",
+        "exception": "cpp",
+        "algorithm": "cpp",
+        "functional": "cpp",
+        "iterator": "cpp",
+        "memory": "cpp",
+        "memory_resource": "cpp",
+        "numeric": "cpp",
+        "optional": "cpp",
+        "random": "cpp",
+        "ratio": "cpp",
+        "string_view": "cpp",
+        "system_error": "cpp",
+        "tuple": "cpp",
+        "type_traits": "cpp",
+        "utility": "cpp",
+        "initializer_list": "cpp",
+        "iomanip": "cpp",
+        "iosfwd": "cpp",
+        "iostream": "cpp",
+        "istream": "cpp",
+        "limits": "cpp",
+        "mutex": "cpp",
+        "new": "cpp",
+        "numbers": "cpp",
+        "ostream": "cpp",
+        "semaphore": "cpp",
+        "sstream": "cpp",
+        "stdexcept": "cpp",
+        "stop_token": "cpp",
+        "streambuf": "cpp",
+        "thread": "cpp",
+        "cinttypes": "cpp",
+        "typeindex": "cpp",
+        "typeinfo": "cpp",
+        "variant": "cpp",
+        "any": "cpp",
+        "charconv": "cpp",
+        "coroutine": "cpp",
+        "source_location": "cpp",
+        "fstream": "cpp",
+        "future": "cpp",
+        "span": "cpp"
+    },
+    "background.fullscreen": {
+        // 本地图片可以拖到浏览器中，快速从地址栏得到file协议的地址
+        "images": [
+            "file:///D:\\GitRoot\\Images\\IMG_20240821_203135.png",
+        ],
+        "opacity": 0.91,
+        "size": "cover",
+        "position": "center",
+        "interval": 0,
+        "random": false
+    },
+    // `sidebar`、`panel` 的配置与 `fullscreen` 一致
+    "background.sidebar": {},
+    "background.panel": {}
+}

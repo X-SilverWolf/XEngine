@@ -1,0 +1,43 @@
+{
+    "version": "0.2.0",
+    // Note: cppvsdbg is NOT supported in Cursor. Use GCC config for debugging in Cursor.
+    "configurations": [
+        {
+            "name": "C++: Launch Tests (GCC)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/build-x64-Debug/bin/engine.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/build/build-x64-Debug/bin",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Set Disassembly Flavor to Intel",
+                    "text": "-gdb-set disassembly-flavor intel",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "CMake: Build All",
+            "miDebuggerPath": "C:/msys64/mingw64/bin/gdb.exe"
+        },
+        {
+            "name": "C++: Launch Tests (MSVC)",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/build-x64-Debug/bin/engine.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/build/build-x64-Debug/bin",
+            "environment": [],
+            "preLaunchTask": "CMake: Build All"
+        }
+    ]
+}

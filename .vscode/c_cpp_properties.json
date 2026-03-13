@@ -1,0 +1,48 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/engine/**",
+                "${workspaceFolder}/thirdParty/**",
+                "/usr/include",
+                "/usr/local/include"
+            ],
+            "defines": [
+                "PLAT_LINUX",
+                "DMAI_API_SHARED"
+            ],
+            "compilerPath": "/usr/bin/g++",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "linux-gcc-x64",
+            "configurationProvider": "ms-vscode.cmake-tools",
+            "compileCommands": "${workspaceFolder}/build/**/compile_commands.json"
+        },
+        {
+            "name": "Win32",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/engine/**",
+                "${workspaceFolder}/thirdParty/**",
+                "${env:INCLUDE}"
+            ],
+            "defines": [
+                "_WIN32",
+                "_WIN64",
+                "PLAT_WIN",
+                "DMAI_API_SHARED",
+                "_CRT_SECURE_NO_WARNINGS"
+            ],
+            "windowsSdkVersion": "10.0.22621.0",
+            "compilerPath": "D:/WorkTools/Microsoft Visual Studio/2022/Enterprise/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/cl.exe",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "windows-msvc-x64",
+            "configurationProvider": "ms-vscode.cmake-tools",
+            "compileCommands": "${workspaceFolder}/build/**/compile_commands.json"
+        }
+    ],
+    "version": 4
+}
