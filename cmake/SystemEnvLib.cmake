@@ -112,6 +112,7 @@ endif()
 find_package(CUDAToolkit REQUIRED)
 message(STATUS "CUDA Toolkit found: ${CUDAToolkit_VERSION}")
 
+
 # set(GTEST_DIR "${THIRD_PARTY_PREFIX}/GTest")
 # list(APPEND CMAKE_PREFIX_PATH ${GTEST_DIR})
 # find_package(GTest REQUIRED)

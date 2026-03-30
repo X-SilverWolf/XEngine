@@ -69,12 +69,9 @@
     "C_Cpp.formatting": "clangFormat",
     "C_Cpp.clang_format_style": "file",
     "C_Cpp.clang_format_fallbackStyle": "Google",
-    // 注意：formatOnType 已移到语言特定设置中，避免在宏定义时自动格式化
-    // 如果需要输入时格式化，可以手动触发（Shift+Alt+F）
-    // CMake settings
     "cmake.configureOnOpen": true,
-    "cmake.buildDirectory": "${workspaceFolder}/XTest/build",
-    "cmake.sourceDirectory": "${workspaceFolder}/XTest",
+    "cmake.buildDirectory": "${workspaceFolder}/build",
+    "cmake.sourceDirectory": "D:/XGitRoot/XEngine",
     "cmake.generator": "MinGW Makefiles",
     "cmake.defaultVariants": {
         "buildType": {
@@ -84,6 +81,27 @@
     },
     "cmake.buildBeforeRun": true,
     "cmake.parallelJobs": 4,
+    // default：GDB（MinGW）
+    "cmake.debugConfig": {
+        "type": "cppdbg",
+        "request": "launch",
+        "cwd": "${workspaceFolder}/build/build-x64-Debug/bin",
+        "externalConsole": false,
+        "MIMode": "gdb",
+        "miDebuggerPath": "C:/msys64/mingw64/bin/gdb.exe",
+        "setupCommands": [
+            {
+                "description": "Enable pretty-printing for gdb",
+                "text": "-enable-pretty-printing",
+                "ignoreFailures": true
+            },
+            {
+                "description": "Set Disassembly Flavor to Intel",
+                "text": "-gdb-set disassembly-flavor intel",
+                "ignoreFailures": true
+            }
+        ]
+    },
     // 设置默认构建目标（可选，留空则构建所有目标）
     // "cmake.defaultTarget": "XPlat",
     // Python settings
@@ -165,7 +183,7 @@
     "background.fullscreen": {
         // 本地图片可以拖到浏览器中，快速从地址栏得到file协议的地址
         "images": [
-            "file:///D:\\GitRoot\\Images\\IMG_20240821_203135.png",
+            // "file:///D:/XGitRoot/Images/猫娘.png",
         ],
         "opacity": 0.91,
         "size": "cover",

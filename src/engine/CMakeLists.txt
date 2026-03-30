@@ -42,9 +42,10 @@ endif()
 
 
 if(SYSTEM_LIBS)
-    target_link_libraries(${PROJECT_NAME} PRIVATE ${SYSTEM_LIBS})
+    target_link_libraries(${PROJECT_NAME} PRIVATE ${SYSTEM_LIBS} runtime)
 endif()
 
 target_include_directories(${PROJECT_NAME} PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}
+        ${PROJ_SRC_DIR}/runtime
 )

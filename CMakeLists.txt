@@ -73,8 +73,7 @@ endif ()
 
 # add cmake templates
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
-
-include(ManageThirdPartyLibrary)
+include(SystemEnvLib)
 include(Utility)
 
 if(CMAKE_BUILD_TYPE STREQUAL Debug)
@@ -104,6 +103,7 @@ endif ()
 
 INCLUDE_DIRECTORIES(
         ${CMAKE_CURRENT_SOURCE_DIR}
+
 )
 
 LINK_DIRECTORIES(
@@ -111,12 +111,4 @@ LINK_DIRECTORIES(
 )
 
 add_subdirectory(src)
-
-
-if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/examples)
-  add_subdirectory(examples)
-endif()
-
-if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/tests)
-  add_subdirectory(tests)
-endif()
+add_subdirectory(thirdParty)
