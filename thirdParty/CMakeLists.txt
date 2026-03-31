@@ -1,4 +1,4 @@
-set(third_party_folder "ThirdParty")
+set(third_party_folder "thirdParty")
 
 set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
 
@@ -9,3 +9,15 @@ if(NOT TARGET spdlog)
     set_target_properties(spdlog PROPERTIES FOLDER ${third_party_folder}/spdlog)
 endif()
 
+if(NOT TARGET json11)
+    # add_subdirectory(json11)
+    set(JSON_INCLUDE ${CMAKE_CURRENT_SOURCE_DIR}/json11)
+    add_library(json11 ${JSON_INCLUDE}/json11.hpp ${JSON_INCLUDE}/json11.cpp)
+    target_include_directories(json11 PUBLIC ${JSON_INCLUDE})
+    if(MSVC)
+        target_compile_options(json11 PRIVATE "/FI" "cstdint")
+    else()
+        target_compile_options(json11 PRIVATE "-include;cstdint")
+    endif()
+    set_target_properties(json11 PROPERTIES FOLDER ${third_party_folder}/json11)
+endif()
