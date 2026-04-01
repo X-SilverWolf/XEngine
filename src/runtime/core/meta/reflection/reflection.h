@@ -3,6 +3,7 @@
 
 #include <functional>
 #include "json.h"
+#include "spdlog/fmt/bundled/format.h"
 
 namespace XEngine
 {
@@ -93,6 +94,85 @@ namespace Reflection
     typedef std::tuple<GetBaseClassReflectionInstanceListFunc, ConstructorWithJson, WriteJsonByName> ClassFunctionTuple;
     typedef std::tuple<SetArrayFunc, GetArrayFunc, GetSizeFunc, GetNameFuncion, GetNameFuncion>      ArrayFunctionTuple;
 
+    namespace Reflection
+    {
+        class TypeMetaRegisterInterface
+        {
+        public:
+            static void registerToClassMap(const char* name, ClassFunctionTuple* value);
+            static void registerToFieldMap(const char* name, FieldFunctionTuple* value);
+            static void registerToMethodMap(const char* name, MethodFunctionTuple* value);
+            static void registerToArrayMap(const char* name, ArrayFunctionTuple* value);
+            static void unregisterAll();
+        };
+
+        class TypeMeta
+        {
+            friend class FieldAccessor;
+            friend class ArrayAccessor;
+            friend class TypeMetaRegisterInterface;
+
+        public:
+            TypeMeta();
+
+            static TypeMeta newMetaFromName(std::string name);
+
+        private:
+            TypeMeta(std::string name);
+
+
+
+        private:
+            std::string m_name;
+            std::vector<FieldAccessor, std::allocator<FieldAccessor>> m_fields;
+            std::vector<MethodAccessor, std::allocator<MethodAccessor>> m_methods;
+
+            bool m_is_valid;
+
+        };
+
+        class FieldAccessor
+        {
+            friend class TypeMeta;
+        public:
+            FieldAccessor();
+
+            void* get(void* instance);
+            void  set(void* instance, void* value);
+
+            TypeMeta getOwnerTypeMeta();
+
+            bool getTypeMeta(TypeMeta& field_type);
+            const char* getFieldName();
+            const char* getFieldType();
+            bool isArray();
+
+            FieldAccessor& operator=(const FieldAccessor& other);
+        
+        private:
+            FieldAccessor(FieldFunctionTuple* func);
+        
+        private:
+            FieldFunctionTuple* m_func;
+            const char* m_name;
+            const char* m_type;
+        };
+
+
+        class MethodAccessor
+        {
+            friend class TypeMeta;
+        public:
+            MethodAccessor();
+
+        private:
+            MethodAccessor(MethodFunctionTuple* func);
+
+        private:
+            MethodFunctionTuple* m_func;
+            const char* m_name;
+        };
+    }
 
 } // namespace XEngine
 
