@@ -1,5 +1,7 @@
 #include "engine.h"
+#include "core/meta/reflection/reflection.h"
 #include "macro.h"
+#include "gContext.h"
 
 namespace XEngine
 {
@@ -17,6 +19,7 @@ Engine::~Engine()
 void Engine::startEngine(const std::string& config_file_path)
 {   
     g_runtime_global_context.startSystems(config_file_path);
+
     LOG_INFO("engine start");
 
 }

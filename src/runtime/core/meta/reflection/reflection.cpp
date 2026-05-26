@@ -72,12 +72,26 @@ namespace Reflection
         m_methods.clear();
     }
 
-    TypeMeta TypeMeta::newMetaFromName(std::string name)
+    TypeMeta TypeMeta::newMetaFromName(const std::string& name)
     {
         return TypeMeta(name);
     }
 
-    TypeMeta::TypeMeta(std::string name)
+    TypeMeta& TypeMeta::operator=(const TypeMeta& other)
+    {
+        if(this == &other)
+        {
+            return *this;
+        }
+        m_name = other.m_name;
+        m_is_valid = other.m_is_valid;
+        m_fields.clear();
+        m_fields = other.m_fields;
+        m_methods.clear();
+        return *this;
+    }
+
+    TypeMeta::TypeMeta(const std::string& name)
     : m_name(name)
     , m_is_valid(false)
     {
@@ -182,9 +196,141 @@ namespace Reflection
     : m_func(func)
     , m_name(k_unknown)
     {
+        if (m_func)
+        {
+            m_name = std::get<0>(*m_func)();
+        }
 
     }
+
+    void MethodAccessor::invoke(void* instance)
+    {
+        std::get<1>(*m_func)(instance);
+    }
+
+    const char* MethodAccessor::getMethodName()
+    {
+        return std::get<0>(*m_func)();
+    }
     
+
+    MethodAccessor& MethodAccessor::operator=(const MethodAccessor& other)
+    {
+        if(this == &other)
+        {
+            return *this;
+        }
+        m_func = other.m_func;
+        m_name = other.m_name;
+        return  *this;
+    }
+
+
+
+    ArrayAccessor::ArrayAccessor()
+    : m_func(nullptr)
+    , m_name(k_unknown)
+    , m_type(k_unknown_type)
+    {
+
+    }
+
+    const char* ArrayAccessor::getArrayTypeName()
+    {
+        return m_name;
+    }
+    
+    const char* ArrayAccessor::getElementType()
+    {
+        return m_type;
+    }
+    
+    void ArrayAccessor::set(int index, void* instance, void* element)
+    {
+        int count = getSize(instance);
+        if(index < 0 || index >= count)
+        {
+            return;
+        }
+        std::get<0>(*m_func)(index, instance, element);
+    }
+
+    void* ArrayAccessor::get(int index, void* instance)
+    {
+        int count = getSize(instance);
+        if(index < 0 || index >= count)
+        {
+            return nullptr;
+        }
+        return std::get<1>(*m_func)(index, instance);
+    }
+
+    int ArrayAccessor::getSize(void* instance)
+    {
+        return std::get<2>(*m_func)(instance);
+    }
+
+    ArrayAccessor& ArrayAccessor::operator=(const ArrayAccessor& other)
+    {
+        if(this == &other)
+        {
+            return *this;
+        }
+        m_func = other.m_func;
+        m_name = other.m_name;
+        m_type = other.m_type;
+        return *this;
+    }
+
+    ArrayAccessor::ArrayAccessor(ArrayFunctionTuple* func)
+    : m_func(func)
+    , m_name(k_unknown)
+    , m_type(k_unknown_type)
+    {
+        if (m_func)
+        {
+            m_name = std::get<3>(*m_func)();
+            m_type = std::get<4>(*m_func)();
+        }
+    }
+
+    ReflectionInstance::ReflectionInstance()
+    : m_meta(TypeMeta())
+    , m_instance(nullptr)
+    {
+
+    }
+
+    ReflectionInstance::ReflectionInstance(TypeMeta& meta, void* instance)
+    : m_meta(meta)
+    , m_instance(instance)
+    {
+
+    }
+
+    ReflectionInstance& ReflectionInstance::operator=(const ReflectionInstance& other)
+    {
+        if(this == &other)
+        {
+            return *this;
+        }
+        m_meta = other.m_meta;
+        m_instance = other.m_instance;
+        return *this;
+    }
+
+    ReflectionInstance& ReflectionInstance::operator=(ReflectionInstance&& other)
+    {
+        if(this == &other)
+        {
+            return *this;
+        }
+        m_meta = other.m_meta;
+        m_instance = other.m_instance;
+        return *this;
+    }
+
+
 
 
 } // namespace Reflection

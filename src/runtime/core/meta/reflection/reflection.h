@@ -115,12 +115,14 @@ namespace Reflection
         public:
             TypeMeta();
 
-            static TypeMeta newMetaFromName(std::string name);
+            static TypeMeta newMetaFromName(const std::string& name);
+            // static bool newArrayAccessorFromName(const std::string& name, ArrayAccessor& accessor);
+            // static bool newFromNameAndJson(const std::string& name, const Json& json);
+
+            TypeMeta& operator=(const TypeMeta& other);
 
         private:
-            TypeMeta(std::string name);
-
-
+            TypeMeta(const std::string& name);
 
         private:
             std::string m_name;
@@ -148,6 +150,7 @@ namespace Reflection
             bool isArray();
 
             FieldAccessor& operator=(const FieldAccessor& other);
+            
         
         private:
             FieldAccessor(FieldFunctionTuple* func);
@@ -165,12 +168,158 @@ namespace Reflection
         public:
             MethodAccessor();
 
+            void invoke(void* instance);
+            const char* getMethodName();
+
+            MethodAccessor& operator=(const MethodAccessor& other);
+
         private:
             MethodAccessor(MethodFunctionTuple* func);
 
         private:
             MethodFunctionTuple* m_func;
             const char* m_name;
+        };
+
+        class ArrayAccessor
+        {
+            friend class TypeMeta;
+        public:
+            ArrayAccessor();
+
+            const char* getArrayTypeName();
+            const char* getElementType();
+            void set(int index, void* instance, void* element);
+            void* get(int index, void* instance);
+            int getSize(void* instance);
+
+            ArrayAccessor& operator=(const ArrayAccessor& other);
+
+        private:
+            ArrayAccessor(ArrayFunctionTuple* func);
+            
+        private:
+            ArrayFunctionTuple* m_func;
+            const char* m_name;
+            const char* m_type;
+        };
+
+        class ReflectionInstance
+        {
+        public:
+            ReflectionInstance();
+            ReflectionInstance(TypeMeta& meta, void* instance);
+            ReflectionInstance& operator=(const ReflectionInstance& other);
+            ReflectionInstance& operator=(ReflectionInstance&& other);
+
+        private:
+            TypeMeta m_meta;
+            void* m_instance;
+        };
+
+        template <typename T>
+        class ReflectionPtr
+        {
+            template <typename U>
+            friend class ReflectionPtr;
+
+        public: 
+            ReflectionPtr(std::string name, T* instance) : 
+                m_name(name), m_instance(instance){}
+            ReflectionPtr() : m_name(), m_instance(nullptr){}
+            ReflectionPtr(const ReflectionPtr& other) :
+                m_name(other.m_name), m_instance(other.m_instance){}
+
+            template<typename U>
+            ReflectionPtr<T>& operator=(const ReflectionPtr<U>& other) 
+            {
+                if(this == static_cast<void*>(&other))
+                {
+                    return *this;
+                }
+                m_name = other.m_name;
+                m_instance = other.m_instance;
+                return *this;
+            }
+
+            template <typename U>
+            ReflectionPtr<T>& operator=(ReflectionPtr<U>&& other)
+            {
+                if(this == static_cast<void*>(&other))
+                {
+                    return *this;
+                }
+                m_name = other.m_name;
+                m_instance = other.m_instance;
+                return *this;
+            }
+
+            ReflectionPtr<T>& operator=(const ReflectionPtr<T>& other)
+            {
+                if(this == static_cast<void*>(&other))
+                {
+                    return *this;
+                }
+                m_name = other.m_name;
+                m_instance = other.m_instance;
+                return *this;
+            }
+
+            ReflectionPtr<T>& operator=(ReflectionPtr<T>&& other)
+            {
+                if(this == static_cast<void*>(&other))
+                {
+                    return *this;
+                }
+                m_name = other.m_name;
+                m_instance = other.m_instance;
+                return *this;
+            }
+
+            std::string getName() const
+            {
+                return m_name;
+            }
+
+            void setType(const std::string& name)
+            {
+                m_name = name;
+            }
+
+            bool operator==(const T* ptr) const { return m_instance == ptr; }
+            bool operator!=(const T* ptr) const { return m_instance != ptr; }
+
+            bool operator==(const ReflectionPtr<T>& other) const { return m_instance == other.m_instance; }
+            bool operator!=(const ReflectionPtr<T>& other) const { return m_instance != other.m_instance; }
+
+            template< typename T1>
+            explicit operator T1*() {return static_cast<T1*>(m_instance);}
+
+            template <typename T1>
+            operator ReflectionPtr<T1>() {return ReflectionPtr<T1>(m_name, static_cast<T1*>(m_instance));}
+
+            template <typename T1>
+            explicit operator const T1*() const {return static_cast<const T1*>(m_instance);}
+
+            template <typename T1>
+            operator const ReflectionPtr<T1>() const { return ReflectionPtr<T1>(m_name, static_cast<const T1*>(m_instance));}
+
+            T* operator->() {return m_instance;}
+            const T* operator->() const {return static_cast<const T*>(m_instance);}
+            
+            T& operator*() {return *m_instance;}
+            const T& operator*() const { return *(static_cast<const T*>(m_instance)); }
+
+            T* getPtr() {return m_instance;}
+            const T* getPtr() const {return static_cast<const T*>(m_instance);}
+
+            T*& getPtrReference() { return m_instance; }
+            operator bool() const { return (m_instance != nullptr); }
+
+        private:
+            std::string m_name;
+            T* m_instance;
+            typedef T m_type;
         };
     }
 
