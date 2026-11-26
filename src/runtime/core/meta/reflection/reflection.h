@@ -1,9 +1,40 @@
+/**
+ *------------------------------------------------------------------------------
+ * @file        reflection
+ * @brief       Declares the type metadata and accessors used by engine reflection.
+ * @details     Defines parser annotations, generated registration hooks and named pointers to
+ *              reflected objects.
+ *
+ * @author      XSilver
+ * @date        2026/4/1
+ * @version     V1.0.0
+ *
+ * @copyright   Copyright (c) 2026 [XSilverWolf]
+ *              Adapted portions: Copyright (c) 2022 Contributors to the Piccolo Engine.
+ *              See LICENSES/Piccolo-MIT.txt for the upstream copyright and permission notice.
+ *              Upstream source: https://github.com/BoomingTech/Piccolo
+ *              This project is licensed under the MIT License.
+ *              See the LICENSE file in the project root for license information.
+ *              SPDX-License-Identifier: MIT
+ *
+ * ------------------------------------------------------------------------------
+ *  REVISION HISTORY (Modify)
+ * ------------------------------------------------------------------------------
+ *  [bde3098] - 2026/4/1 by 骇客速成计划
+ *    - Introduced reflection annotations and registration interfaces.
+ *  [550ea68] - 2026/5/27 by 骇客速成计划
+ *    - Added the typed ReflectionPtr wrapper for reflected objects.
+ *  [V1.0.0] - 2026/11/26 by XSilver
+ *    - Recorded the MIT license adopted by the project.
+ * ------------------------------------------------------------------------------
+ */
+
 #ifndef XENGINE_REFLECTION_H
 #define XENGINE_REFLECTION_H
 
 #include <functional>
 #include "json.h"
-#include "spdlog/fmt/bundled/format.h"
+#include <spdlog/fmt/bundled/format.h>
 
 namespace XEngine
 {

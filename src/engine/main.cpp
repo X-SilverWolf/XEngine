@@ -1,3 +1,31 @@
+/**
+ *------------------------------------------------------------------------------
+ * @file        main
+ * @brief       Starts the engine with the configuration next to its executable.
+ * @details     Sets the working directory to the executable's directory and runs the engine
+ *              lifecycle.
+ *
+ * @author      XSilver
+ * @date        2026/3/14
+ * @version     V1.0.0
+ *
+ * @copyright   Copyright (c) 2026 [XSilverWolf]
+ *              This project is licensed under the MIT License.
+ *              See the LICENSE file in the project root for license information.
+ *              SPDX-License-Identifier: MIT
+ *
+ * ------------------------------------------------------------------------------
+ *  REVISION HISTORY (Modify)
+ * ------------------------------------------------------------------------------
+ *  [48cdc63] - 2026/3/14 by 骇客速成计划
+ *    - Added the console entry point with a greeting.
+ *  [7a759d8] - 2026/3/30 by 骇客速成计划
+ *    - Resolved XEngine.ini and invoked engine startup, run and shutdown.
+ *  [V1.0.0] - 2026/11/26 by XSilver
+ *    - Recorded the MIT license adopted by the project.
+ * ------------------------------------------------------------------------------
+ */
+
 #include <iostream>
 #include <filesystem>
 #include "engine.h"

@@ -1,3 +1,33 @@
+/**
+ *------------------------------------------------------------------------------
+ * @file        logSystem
+ * @brief       Routes engine diagnostics to an asynchronous spdlog console logger.
+ * @details     Fatal messages also raise an exception after the logger formats the message.
+ *
+ * @author      XSilver
+ * @date        2026/3/30
+ * @version     V1.0.0
+ *
+ * @copyright   Copyright (c) 2026 [XSilverWolf]
+ *              Adapted portions: Copyright (c) 2022 Contributors to the Piccolo Engine.
+ *              See LICENSES/Piccolo-MIT.txt for the upstream copyright and permission notice.
+ *              Upstream source: https://github.com/BoomingTech/Piccolo
+ *              This project is licensed under the MIT License.
+ *              See the LICENSE file in the project root for license information.
+ *              SPDX-License-Identifier: MIT
+ *
+ * ------------------------------------------------------------------------------
+ *  REVISION HISTORY (Modify)
+ * ------------------------------------------------------------------------------
+ *  [7a759d8] - 2026/3/30 by 骇客速成计划
+ *    - Created the color console sink and initialized the asynchronous logging worker.
+ *  [3d04603] - 2026/11/26 by 骇客速成计划
+ *    - Shut down spdlog while the runtime DLL is loaded to join its worker.
+ *  [V1.0.0] - 2026/11/26 by XSilver
+ *    - Recorded the MIT license adopted by the project.
+ * ------------------------------------------------------------------------------
+ */
+
 #ifndef XENGINE_LOG_SYSTEM_H
 #define XENGINE_LOG_SYSTEM_H
 
