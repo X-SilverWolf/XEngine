@@ -1,12 +1,7 @@
+if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
+    cmake_minimum_required(VERSION 3.28)
+    project(XEngineEditor VERSION 1.0.0 LANGUAGES CXX)
+endif()
 
-include_directories(
-        ${CMAKE_CURRENT_SOURCE_DIR}/
-)
-
-build_shared_library_with_test(editor)
-
-# setting the include directories, ensure can find System/Standard.h etc. header files
-# target_include_directories(runtime
-# PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
-# PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}
-# )       
+# The editor has no compiled sources yet.
+add_library(editor INTERFACE)

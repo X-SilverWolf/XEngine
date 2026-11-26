@@ -9,7 +9,7 @@ else()
 endif ()
 
 macro(add_add_subdirs)
-    file(GLOB dirs "*")
+    file(GLOB dirs "${CMAKE_CURRENT_SOURCE_DIR}/*")
     foreach (dir IN LISTS dirs)
         if(IS_DIRECTORY ${dir} AND EXISTS ${dir}/CMakeLists.txt)
             add_subdirectory("${dir}")
@@ -19,7 +19,7 @@ endmacro()
 
 # 增强的宏，自动处理所有子目录，包括特殊目录
 macro(add_add_subdirs_ignore_test)
-    file(GLOB dirs "*")
+    file(GLOB dirs "${CMAKE_CURRENT_SOURCE_DIR}/*")
     foreach (dir IN LISTS dirs)
         if(IS_DIRECTORY ${dir} AND EXISTS ${dir}/CMakeLists.txt)
             # 跳过特殊目录，因为它们已经在build_shared_library中处理了
@@ -107,7 +107,8 @@ function(build_tests_from_directory LIB_NAME TEST_DIR)
         message(STATUS "Adding test: ${test_exe_name} from ${rel_path}")
         
         add_executable(${test_exe_name} ${test_source})
-        set_target_properties(${test_exe_name} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${EXECUTABLE_OUTPUT_PATH}/../test/)
+        cmake_path(GET EXECUTABLE_OUTPUT_PATH PARENT_PATH output_root)
+        set_target_properties(${test_exe_name} PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${output_root}/test")
         
         # 链接主库和依赖项
         if(TARGET ${LIB_NAME})

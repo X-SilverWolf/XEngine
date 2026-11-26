@@ -48,7 +48,8 @@ public:
     ~LogSystem()
     {
         m_logger->flush();
-        spdlog::drop_all();
+        // Join the async worker while the runtime DLL is still loaded.
+        spdlog::shutdown();
     };
 
     template<typename... TARGS>
