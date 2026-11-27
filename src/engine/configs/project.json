@@ -1,0 +1,13 @@
+{
+    "project": {
+        "name": "XEngineApp"
+    },
+    "log": {
+        "level": "info",
+        "directory": "log"
+    },
+    "paths": {
+        "data": "data",
+        "assets": "assets"
+    }
+}
